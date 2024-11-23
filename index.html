@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Dados do Solo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Dados do Solo</h1>
+        
+        <form id="soloForm">
+            <label for="ph">pH do Solo:</label>
+            <input type="number" id="ph" name="ph" step="0.1" required>
+
+            <label for="umidade">Umidade do Solo (%):</label>
+            <input type="number" id="umidade" name="umidade" step="0.1" required>
+
+            <label for="temperatura">Temperatura do Solo (°C):</label>
+            <input type="number" id="temperatura" name="temperatura" step="0.1" required>
+
+            <label for="nitrogenio">Nitrogênio (ppm):</label>
+            <input type="number" id="nitrogenio" name="nitrogenio" step="0.1" required>
+
+            <label for="fosforo">Fósforo (ppm):</label>
+            <input type="number" id="fosforo" name="fosforo" step="0.1" required>
+
+            <label for="potassio">Potássio (ppm):</label>
+            <input type="number" id="potassio" name="potassio" step="0.1" required>
+
+            <label for="microbioma">Microbioma:</label>
+            <input type="number" id="microbioma" name="microbioma" step="0.1" required>
+
+            <button type="submit">Cadastrar Dados</button>
+        </form>
+
+        <div id="responseMessage"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
