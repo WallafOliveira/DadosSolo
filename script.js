@@ -13,7 +13,7 @@ document.getElementById('soloForm').addEventListener('submit', function (e) {
     };
 
     // Enviar os dados para a API Flask
-    fetch('http://127.0.0.1:5000/api/solo', {
+    fetch('https://backsolo2.onrender.com/api/solo', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
