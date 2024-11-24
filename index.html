@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Dados do Solo</title>
+    <title>Cadastro e Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <h1>Login de Usuário</h1>
+        <form id="loginForm">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginMessage"></div>
+    </div>
+
+    <div class="container" id="soloContainer" style="display: none;">
         <h1>Cadastro de Dados do Solo</h1>
-        
         <form id="soloForm">
             <label for="ph">pH do Solo:</label>
             <input type="number" id="ph" name="ph" step="0.1" required>
@@ -34,7 +47,6 @@
 
             <button type="submit">Cadastrar Dados</button>
         </form>
-
         <div id="responseMessage"></div>
     </div>
 
