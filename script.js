@@ -1,7 +1,7 @@
 document.getElementById('soloForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Impede o envio do formulário
+    e.preventDefault();
 
-    // Obter os valores dos campos do formulário
+
     const dados = {
         ph: parseFloat(document.getElementById('ph').value),
         umidade: parseFloat(document.getElementById('umidade').value),
@@ -12,7 +12,7 @@ document.getElementById('soloForm').addEventListener('submit', function (e) {
         microbioma: parseFloat(document.getElementById('microbioma').value)
     };
 
-    // Enviar os dados para a API Flask
+   
     fetch('https://backsolo2.onrender.com/api/solo', {
         method: 'POST',
         headers: {
