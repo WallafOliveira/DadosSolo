@@ -52,6 +52,7 @@ document.getElementById('soloForm').addEventListener('submit', function (e) {
         microbioma: parseFloat(document.getElementById('microbioma').value)
     };
 
+
     fetch('https://backsolo2.onrender.com/api/solo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
