@@ -1,50 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('form-solo');
-    const usuarioId = localStorage.getItem('usuarioId'); // Obtém o usuário autenticado
-    const phInput = document.getElementById('ph');
-    const umidadeInput = document.getElementById('umidade');
-    const temperaturaInput = document.getElementById('temperatura');
-    const nitrogenioInput = document.getElementById('nitrogenio');
-    const fosforoInput = document.getElementById('fosforo');
-    const potassioInput = document.getElementById('potassio');
-    const microbiomaInput = document.getElementById('microbioma');
-    const mensagemSucesso = document.getElementById('mensagem-sucesso');
-    const mensagemErro = document.getElementById('mensagem-erro');
+document.getElementById('soloForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Impede o envio do formulário para processar com JavaScript
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    // Obter os valores dos campos do formulário e garantir que sejam válidos
+    const dados = {
+        ph: parseFloat(document.getElementById('ph').value),
+        umidade: parseFloat(document.getElementById('umidade').value),
+        temperatura: parseFloat(document.getElementById('temperatura').value),
+        nitrogenio: parseFloat(document.getElementById('nitrogenio').value),
+        fosforo: parseFloat(document.getElementById('fosforo').value),
+        potassio: parseFloat(document.getElementById('potassio').value),
+        microbioma: parseFloat(document.getElementById('microbioma').value)
+    };
 
-        // Coleta os dados dos inputs do formulário
-        const dadosSolo = {
-            usuario_id: usuarioId,
-            ph: parseFloat(phInput.value),
-            umidade: parseFloat(umidadeInput.value),
-            temperatura: parseFloat(temperaturaInput.value),
-            nitrogenio: parseFloat(nitrogenioInput.value),
-            fosforo: parseFloat(fosforoInput.value),
-            potassio: parseFloat(potassioInput.value),
-            microbioma: parseFloat(microbiomaInput.value)
-        };
+    // Validar se os valores dos campos estão corretos (ex: não podem ser NaN)
+    for (let key in dados) {
+        if (isNaN(dados[key])) {
+            alert(`Por favor, insira um valor válido para ${key}`);
+            return;
+        }
+    }
 
-        // Envia os dados para o backend via POST
-        fetch('https://dadoscadasolo.onrender.com/api/solo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosSolo)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    mensagemSucesso.style.display = 'block';
-                    mensagemErro.style.display = 'none';
-                    form.reset();  // Limpa os campos após o envio
-                }
-            })
-            .catch(error => {
-                mensagemErro.style.display = 'block';
-                mensagemSucesso.style.display = 'none';
-            });
+    // Enviar os dados para a API Flask
+    fetch('https://backsolo2.onrender.com/api/solo', {  // Verifique se o URL está correto
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)  // Envia os dados como JSON
+    })
+    .then(response => response.json())  // Converte a resposta da API para JSON
+    .then(data => {
+        const messageDiv = document.getElementById('responseMessage');
+        messageDiv.textContent = 'Dados inseridos com sucesso!';
+        messageDiv.className = 'success';  // Adiciona uma classe de sucesso
+    })
+    .catch(error => {
+        const messageDiv = document.getElementById('responseMessage');
+        messageDiv.textContent = 'Erro ao cadastrar dados.';
+        messageDiv.className = 'error';  // Adiciona uma classe de erro
+        console.error('Erro:', error);  // Log de erro no console
     });
 });
