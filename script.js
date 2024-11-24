@@ -1,7 +1,7 @@
 document.getElementById('soloForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Impede o envio do formulário para processar com JavaScript
+    e.preventDefault(); // Impede o envio do formulário
 
-    // Obter os valores dos campos do formulário e garantir que sejam válidos
+    // Obter os valores dos campos do formulário
     const dados = {
         ph: parseFloat(document.getElementById('ph').value),
         umidade: parseFloat(document.getElementById('umidade').value),
@@ -12,32 +12,24 @@ document.getElementById('soloForm').addEventListener('submit', function (e) {
         microbioma: parseFloat(document.getElementById('microbioma').value)
     };
 
-    // Validar se os valores dos campos estão corretos (ex: não podem ser NaN)
-    for (let key in dados) {
-        if (isNaN(dados[key])) {
-            alert(`Por favor, insira um valor válido para ${key}`);
-            return;
-        }
-    }
-
     // Enviar os dados para a API Flask
-    fetch('https://backsolo2.onrender.com/api/solo', {  // Verifique se o URL está correto
+    fetch('https://backsolo2.onrender.com/api/solo', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dados)  // Envia os dados como JSON
+        body: JSON.stringify(dados)
     })
-    .then(response => response.json())  // Converte a resposta da API para JSON
+    .then(response => response.json())
     .then(data => {
         const messageDiv = document.getElementById('responseMessage');
         messageDiv.textContent = 'Dados inseridos com sucesso!';
-        messageDiv.className = 'success';  // Adiciona uma classe de sucesso
+        messageDiv.className = 'success';
     })
     .catch(error => {
         const messageDiv = document.getElementById('responseMessage');
         messageDiv.textContent = 'Erro ao cadastrar dados.';
-        messageDiv.className = 'error';  // Adiciona uma classe de erro
-        console.error('Erro:', error);  // Log de erro no console
+        messageDiv.className = 'error';
+        console.error('Erro:', error);
     });
 });
